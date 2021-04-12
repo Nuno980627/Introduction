@@ -1,7 +1,16 @@
 module.exports = {
-  base:'/NunoDoc/',
-  title:'郑泽伟个人介绍',
-    themeConfig: {
-      sidebar: 'auto'
-    }
-  }
+  base: "/Introduction/",
+  title: "Nuno Documents",
+  themeConfig: {
+    sidebar: {
+     
+      "/fontend/": [
+        {
+          title: "FontEnd",
+          collapsable: false,
+          children: [{ title: "Mock", path: "/fontend/mock" }],
+        },
+      ],
+    },
+  },
+};
