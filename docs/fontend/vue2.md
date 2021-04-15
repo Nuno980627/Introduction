@@ -21,11 +21,11 @@ vue2 开始过程中遇到的一些问题解决，以及一些学习思考，包
  使用 this.$moment().format()
 ```
 
-vue.prototype 在 main.js 往 vue 实例中定义,获将`普通第三方插件/方法`,(不是为 vue 专门所定制的组件方法)，挂载到 vue 实例中,方便全局调用。
+vue.prototype 在 main.js 往 vue 实例中定义变量,或将`普通第三方插件/方法`,(不是为 vue 专门所定制的组件方法)，挂载到 vue 实例中,方便全局调用。
 
 #### Vue.use
 
-同样时挂载全局组件/方法,和 Vue.prototype 不同的时,vue 官方提供的 Vue.use()方法,用来引用专门为`Vue定制`的组件。
+同样时挂载全局组件/方法,和 Vue.prototype 不同的是,vue 官方提供的 Vue.use()方法,用来引用专门为`Vue定制`的组件。
 那么,问题来了,什么是专门为 Vue 定制的组件,根据 Vue 官方文档解释,Vue 为专属定制组件，提供了一个 install 方法
 
 ```javascript
