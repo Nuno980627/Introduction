@@ -7,7 +7,12 @@ module.exports = {
         {
           title: "FontEnd",
           collapsable: false,
-          children: [{ title: "vue2", path: "/fontend/vue2" },{ title: "Mock", path: "/fontend/mock" },{ title: "vue-router", path: "/fontend/router" }],
+          children: [
+            { title: "vue2", path: "/fontend/vue2" },
+            { title: "Mock", path: "/fontend/mock" },
+            { title: "vue-router", path: "/fontend/router" },
+            { title: "apply-call", path: "/fontend/apply" }
+          ],
         },
         {
           title: "git",
