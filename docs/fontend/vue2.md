@@ -34,7 +34,7 @@ export default MyPlugin;
 ```
 
 在 main.js 中使用 Vue.js 注册组件时,Vue 会自动执行一遍 install 方法内的操作,并且 Vue 或默认传入一个参数`Vue构造器`,后面的 options 为自定义函数。
-官方建议 Vue.use()在 new vue 之前使用,如果你需要在组件内，做一些生命周期的混入，或者对各种 options 的读取/方法，如果在 new vue()之后 use,当 new vue 实例创建的时候，组件还没被引入，无法发在到 vue 实例中
+官方建议 Vue.use()在 new vue 之前使用,如果你需要在组件内，做一些生命周期的混入，或者对各种 options 的读取/方法，如果在 new vue()之后 use,当 new vue 实例创建的时候，组件还没被引入，无法挂载到 vue 实例中
 详细可参考后方 install 组件的文档。
 
 ## Vue install 创建组件
