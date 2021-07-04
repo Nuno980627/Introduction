@@ -45,7 +45,7 @@ Vue.use = function (plugin: Function | Object) {
 	args.unshift(this)
      //判断是plugin是obj还是function
     if (typeof plugin.install === 'function') {
-    //plugin.install的方法替换plugin指向(实则直接掉欧阳那个plugin.install)，传入参数args
+    //plugin.install的方法替换plugin指向(实则直接调用plugin.install)，传入参数args
       plugin.install.apply(plugin, args)
     } else if (typeof plugin === 'function') {
         //如果是函数，直接调用
@@ -55,4 +55,47 @@ Vue.use = function (plugin: Function | Object) {
 	// ......
 }
 ```
-收工。
+## 用来调用方法
+
+使用call、apply调用方法，并改变原函数内部的this指向
+```javascript
+const obj={
+    name:'nuno',
+    age:24
+}
+
+function student (a,b){
+    console.log(this)
+    console.log(a+b)
+}
+student.call(obj,1,2)
+console=> {
+   name:'nuno',
+    age:24
+} , 3
+//call方法将student的内部this指向obj，student函数内部的this即为obj对象
+```
+## 用来继承
+call、apply用来调用方法并实现继承
+```javascript
+function father(a,b,c){
+    this.a=a
+    this.b=b
+    this.c=c
+}
+function son(){
+    father.call(this,1,2,3)
+}
+console.log(new son())=> son{
+     a=1,
+     b:2,
+     c:3
+ }
+ ```
+ ## bind的区别
+都是改变this指向，bind的返回仍是一个函数，不会立即执行该函数。
+```javascript
+this.$functionName()=fn.bind(this,1,2)
+也可以 fn.bind(this,1,2)()来调用,
+```
+而apply和call是立即执行函数。

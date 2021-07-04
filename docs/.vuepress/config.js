@@ -5,7 +5,7 @@ module.exports = {
     sidebar: {
       "/fontend/": [
         {
-          title: "FontEnd",
+          title: "JS",
           collapsable: false,
           children: [
             { title: "vue2", path: "/fontend/vue2" },
@@ -14,16 +14,29 @@ module.exports = {
             { title: "apply-call", path: "/fontend/apply" },
             { title: "file-saver", path: "/fontend/file" },
             { title: "vue-i18n", path: "/fontend/i18n" },
+            { title: "Class", path: "/fontend/class" },
           ],
         },
         {
-          title: "git",
+          title: "Git",
           collapsable: false,
           children: [
             { title: "git报错系列", path: "/fontend/error" },
             { title: "ssh_key", path: "/fontend/sshkey" }
           ],
         },
+        {
+          title: "CSS",
+          collapsable: false,
+          children: [
+            { title: "float", path: "/fontend/float" },
+            { title: "box", path: "/fontend/box" },
+            { title: "position", path: "/fontend/position" },
+            { title: "transition", path: "/fontend/transition" },
+            { title: "transform", path: "/fontend/transform" },
+            { title: "animation", path: "/fontend/animation" }
+          ],
+        }
       ]
     },
   },
