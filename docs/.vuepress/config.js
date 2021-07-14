@@ -15,6 +15,7 @@ module.exports = {
             { title: "file-saver", path: "/fontend/file" },
             { title: "vue-i18n", path: "/fontend/i18n" },
             { title: "Class", path: "/fontend/class" },
+            { title: "闭包", path: "/fontend/closure" },
           ],
         },
         {
