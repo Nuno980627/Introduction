@@ -29,8 +29,8 @@ vue.prototype 在 main.js 往 vue 实例中定义变量,或将`普通第三方�
 那么,问题来了,什么是专门为 Vue 定制的组件,根据 Vue 官方文档解释,Vue 为专属定制组件，提供了一个 install 方法
 
 ```javascript
-MyPlugin.install = function(Vue, options) {};
-export default MyPlugin;
+MyPlugin.install = function(Vue, options) {}
+export default MyPlugin
 ```
 
 在 main.js 中使用 Vue.js 注册组件时,Vue 会自动执行一遍 install 方法内的操作,并且 Vue 或默认传入一个参数`Vue构造器`,后面的 options 为自定义函数。
@@ -101,3 +101,135 @@ data(){
   }
 }
 ```
+
+## nexttick
+
+重所周知 vue 的 dom 渲染是虚拟 DOM(Virtual Dom)
+虚拟 DOM 有很多的好处，但是 vue 的 dom 渲染还有一个特点。
+当对 dom 进行操作时，为了避免多次的 dom 渲染，造成不必要的性能消耗，vue 的 dom 会进行周期性的渲染。
+这也会有一定的副作用，当 js 操作 dom 时，可能该组件还没有被页面渲染，导致无法获取最新的 dom 树
+
+所以 vue 官方也给了一个 api，Vue.nexttick。  
+`官方定义`：在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+
+```javascript
+<ul ref="list">
+<li v-for="item in list">{{item}}</li>
+<ul/>
+<button @click="addDOM"></button>
+
+
+<script>
+data(){
+    return{
+        list:[1,2,3]
+    }
+}
+addDOM(){
+    this.list.push(4)
+    this.list.push(5)
+    this.list.push(6)
+    console.log(this.$refs.list.length)
+    //此处按理来说，往list数组中添加了3个元素,通过v-for渲染，页面上也会出现新的3个li
+    //所以理应this.$refs.list.length=6,但事实上，此时只会输出3
+    //因为vue的dom渲染为周期化渲染，当执行console.log时，页面的dom渲染还没有完成。
+
+    所以此时该用到this.$nexttick api
+    会将回调函数，延迟到DOM渲染完后去执行
+    this.$nexttick(()=>{
+      console.log(this.$refs.list.length)
+    })
+
+    此时，console.log()会输出正确答案6
+
+
+
+}
+</script>
+```
+
+## Vue.extend
+
+动态注册组件
+
+### 通过 Vue.extend 实现用 js API 的方式调用组件
+
+像 this.$toast this.$message 这样，通过 vue 实例上的全局方法，调用 vue 的组件，这时，我们就可以用上 vue.extend
+来动态注册实例
+
+以 toast 组件为例
+
+```javascript
+import Vue from 'vue' //导入vue
+import toast from './toast.vue' //导入.vue文件
+
+const instance = Vue.extend(toast) //使用vue.extend生成组件构造器，可以向new vue一样，new一个
+
+function newToast(text, duration) {
+    //生成实例
+  const newDom = new instance({
+    el: document.createElement('div'), //也可以不要el属性，用$mount()挂载
+    data() {
+      return {
+        text: text,
+        show: true,
+      }
+    },
+  })
+  //插入到body的最后面
+  document.body.appendChild(newDom.$el)
+  settimeout(() => {
+    newDom.show = false
+  }, 2000)
+}
+
+function insertVue(){
+    vue.prototype.$toast=newToast()
+}
+//因为使用vue.use,可用文档之前讲过的vue.install来代替该方案
+export default insertVue
+
+最后在vue的main.js中引入该文件，使用Vue.use初始化
+```
+
+## Vue 自定义指令
+
+例如 v-loading
+
+### 注册指令
+
+```javascript
+import loading from './loading.js'
+Vue.directive('loading', loading)
+```
+
+### 指令实例
+
+```javascript
+import vue from 'vue'
+import loading from './loading.vue'
+//这里应该是一个对象
+const customDirective = {
+  inserted: function(el, binding) {
+      //inserted生命周期,binding内容可搜索vue自定义指令
+      const newLoading=Vue.extend(loading)
+      const instance=newLoading().$mount() //得到$el dom内容
+      //在el中保存我们的loading的dom方便使用,也可以存个全局变量
+      el.instance=instance.$el
+      //可以通过binding获得绑定的value，binding。value
+    
+  },
+  update(el, binding){
+//update生命周期，当值改变时调用
+   binding.value?append(el):remove(el)
+  }
+  function append(el){
+      el.appendChild( el.instance)
+  }
+  function remove(el){
+      el.removeChild( el.instance)
+  }
+}
+export default customDirective
+```
+自定义指令完成
