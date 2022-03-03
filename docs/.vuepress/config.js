@@ -16,6 +16,9 @@ module.exports = {
             { title: "vue-i18n", path: "/fontend/i18n" },
             { title: "Class", path: "/fontend/class" },
             { title: "闭包", path: "/fontend/closure" },
+            { title: "&& || 运算符", path: "/fontend/operator" },
+            { title: "TS", path: "/fontend/ts" },
+            { title: "函数式组件", path: "/fontend/funcComponent" },
           ],
         },
         {
