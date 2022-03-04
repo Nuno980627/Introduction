@@ -19,6 +19,7 @@ module.exports = {
             { title: "&& || 运算符", path: "/fontend/operator" },
             { title: "TS", path: "/fontend/ts" },
             { title: "函数式组件", path: "/fontend/funcComponent" },
+            { title: "预编译", path: "/fontend/precompiled" },
           ],
         },
         {
