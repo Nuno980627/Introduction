@@ -20,6 +20,7 @@ module.exports = {
             { title: "TS", path: "/fontend/ts" },
             { title: "函数式组件", path: "/fontend/funcComponent" },
             { title: "预编译", path: "/fontend/precompiled" },
+            { title: "Function", path: "/fontend/function" },
           ],
         },
         {
