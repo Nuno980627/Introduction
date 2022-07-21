@@ -42,6 +42,13 @@ module.exports = {
             { title: "transform", path: "/fontend/transform" },
             { title: "animation", path: "/fontend/animation" }
           ],
+        },
+        {
+          title: "WebPack",
+          collapsable: false,
+          children: [
+            { title: "Loader", path: "/fontend/loader" }
+          ],
         }
       ]
     },
