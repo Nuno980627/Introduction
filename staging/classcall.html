@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>class | Nuno Documents</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="">
+    
+    <link rel="preload" href="/Introduction/assets/css/0.styles.c1096076.css" as="style"><link rel="preload" href="/Introduction/assets/js/app.8468b368.js" as="script"><link rel="preload" href="/Introduction/assets/js/2.d1b1ba3b.js" as="script"><link rel="preload" href="/Introduction/assets/js/30.04e8e906.js" as="script"><link rel="prefetch" href="/Introduction/assets/js/10.ee2ee916.js"><link rel="prefetch" href="/Introduction/assets/js/11.99524708.js"><link rel="prefetch" href="/Introduction/assets/js/12.b0148dc2.js"><link rel="prefetch" href="/Introduction/assets/js/13.a19f2674.js"><link rel="prefetch" href="/Introduction/assets/js/14.e1a2ee13.js"><link rel="prefetch" href="/Introduction/assets/js/15.3c7c4160.js"><link rel="prefetch" href="/Introduction/assets/js/16.1d08b462.js"><link rel="prefetch" href="/Introduction/assets/js/17.de5249cd.js"><link rel="prefetch" href="/Introduction/assets/js/18.0f7a2697.js"><link rel="prefetch" href="/Introduction/assets/js/19.a72581c7.js"><link rel="prefetch" href="/Introduction/assets/js/20.173f331f.js"><link rel="prefetch" href="/Introduction/assets/js/21.0a36db22.js"><link rel="prefetch" href="/Introduction/assets/js/22.c167c141.js"><link rel="prefetch" href="/Introduction/assets/js/23.724c79aa.js"><link rel="prefetch" href="/Introduction/assets/js/24.73d43f5e.js"><link rel="prefetch" href="/Introduction/assets/js/25.4e43b90f.js"><link rel="prefetch" href="/Introduction/assets/js/26.68926bf9.js"><link rel="prefetch" href="/Introduction/assets/js/27.e6ca7e7e.js"><link rel="prefetch" href="/Introduction/assets/js/28.a2e99cdd.js"><link rel="prefetch" href="/Introduction/assets/js/29.78348f7c.js"><link rel="prefetch" href="/Introduction/assets/js/3.fa1578ed.js"><link rel="prefetch" href="/Introduction/assets/js/4.c453bc54.js"><link rel="prefetch" href="/Introduction/assets/js/5.76fc70b2.js"><link rel="prefetch" href="/Introduction/assets/js/6.498ab014.js"><link rel="prefetch" href="/Introduction/assets/js/7.3f5168c2.js"><link rel="prefetch" href="/Introduction/assets/js/8.67f56858.js"><link rel="prefetch" href="/Introduction/assets/js/9.9384b474.js">
+    <link rel="stylesheet" href="/Introduction/assets/css/0.styles.c1096076.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/Introduction/" class="home-link router-link-active"><!----> <span class="site-name">Nuno Documents</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="class"><a href="#class" class="header-anchor">#</a> class</h2> <p>class作为ES6的function 语法糖，默认带有一个constructor() 构造函数</p> <p>class student{
+//没有的话会自动默认生成 constructor(){}
+constructor(name,age){
+this.name=name
+this.age=age
+}
+introduce(){
+renturn <code>name is ${this.name},age is ${this.age}</code>
+}
+}
+//new一下class
+const instance=new student('nuno',24)
+console.log(instance)
+//student{
+name:'nuno',
+age:24<br>
+}
+console.log(instance.introduce())
+//name is nuno,age is 24</p> <h2 id="关于class的继承"><a href="#关于class的继承" class="header-anchor">#</a> 关于class的继承</h2> <p>class people extends student{</p> <p>//子项也需要有constuctor函数，且需在构造函数内调用super(),来调用继承的
+//父项中的constructor函数</p> <div class="language- extra-class"><pre><code>    constroctor(name,age,hobby){
+        super(name,age)
+        this.hobby=hobby
+    }
+</code></pre></div><p>}</p> <p>const action=new prople('nuno',24,'football')
+console.log(action)
+//输出
+people{
+name:'nuno',
+age:24,
+hobby:'football'
+}
+console.log(action.introduce())
+//name is nuno,age is 24</p> <h2 id="关于call、apply的调用方法"><a href="#关于call、apply的调用方法" class="header-anchor">#</a> 关于call、apply的调用方法</h2> <p>使用call、apply改变原函数内部的this指向</p> <p>const obj={
+name:'nuno',
+age:24
+}</p> <p>function student (a,b){
+console.log(this)
+console.log(a+b)
+}
+student.call(obj,1,2)
+console=&gt; {
+name:'nuno',
+age:24
+} , 3
+//call方法将student的内部this指向obj，student函数内部的this即为obj对象</p> <h3 id="用来继承"><a href="#用来继承" class="header-anchor">#</a> 用来继承</h3> <p>function father(a,b,c){
+this.a=a
+this.b=b
+this.c=c
+}
+function son(){
+father.call(this,1,2,3)
+}
+console.log(new son())=&gt; son{
+a=1,
+b:2,
+c:3
+}</p> <h2 id="bind的区别"><a href="#bind的区别" class="header-anchor">#</a> bind的区别</h2> <p>都是改变this指向，bind的返回仍是一个函数，不会立即执行该函数。
+this.$functionName()=fn.bind(this,1,2)
+也可以 fn.bind(this,1,2)()来调用,
+而apply和call是立即执行函数。</p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/Introduction/assets/js/app.8468b368.js" defer></script><script src="/Introduction/assets/js/2.d1b1ba3b.js" defer></script><script src="/Introduction/assets/js/30.04e8e906.js" defer></script>
+  </body>
+</html>
