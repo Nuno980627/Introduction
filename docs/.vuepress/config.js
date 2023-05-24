@@ -49,7 +49,14 @@ module.exports = {
           children: [
             { title: "Loader", path: "/fontend/loader" }
           ],
-        }
+        },
+        {
+          title: "Android",
+          collapsable: false,
+          children: [
+            { title: "AndroidManifest", path: "/fontend/android/AndroidManifest" }
+          ],
+        },
       ]
     },
   },
